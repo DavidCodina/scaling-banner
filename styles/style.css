@@ -24,6 +24,9 @@ header {
   left: 0;
   height: 100%;
   width: 100%;
+  transform: scale(1);
+  -webkit-animation: scale_header_content 4s ease-out;
+	animation:         scale_header_content 4s ease-out;
 }
 
 header h1 {
@@ -51,22 +54,30 @@ header::after {
   background: url('../images/banner.png') no-repeat center center/cover;
   -webkit-filter: blur(2px);
   filter: blur(2px);
-  -webkit-animation: scale_banner 4s ease-out;
-	animation:         scale_banner 4s ease-out;
+  -webkit-animation: scale_header_background 4s ease-out;
+	animation:         scale_header_background 4s ease-out;
   z-index: -1;
 }
 
-@-webkit-keyframes scale_banner {
+@-webkit-keyframes scale_header_background {
   from {
     -webkit-transform: scale(1.5);
     -webkit-filter: blur(0px);
   }
 }
-@keyframes scale_banner {
+@keyframes scale_header_background {
   from {
     transform: scale(1.5);
     filter: blur(0px);
   }
+}
+
+
+@-webkit-keyframes scale_header_content {
+  from { -webkit-transform: scale(0.5); }
+}
+@keyframes scale_header_content {
+  from { transform: scale(0.5); }
 }
 
 
