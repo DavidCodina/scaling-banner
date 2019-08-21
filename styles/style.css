@@ -74,10 +74,10 @@ header::after {
 
 
 @-webkit-keyframes scale_header_content {
-  from { -webkit-transform: scale(0.5); }
+  from { -webkit-transform: scale(0.66); }
 }
 @keyframes scale_header_content {
-  from { transform: scale(0.5); }
+  from { transform: scale(0.66); }
 }
 
 
