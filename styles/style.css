@@ -25,8 +25,8 @@ header {
   height: 100%;
   width: 100%;
   transform: scale(1);
-  -webkit-animation: scale_header_content 4s ease-out;
-	animation:         scale_header_content 4s ease-out;
+  -webkit-animation: scale_header_content 4s ease-in-out forwards;
+	animation:         scale_header_content 4s ease-in-out forwards;
 }
 
 header h1 {
@@ -53,32 +53,58 @@ header::after {
   width: 100%;
   background: url('../images/banner.png') no-repeat center center/cover;
   -webkit-filter: blur(2px);
-  filter: blur(2px);
-  -webkit-animation: scale_header_background 4s ease-out;
-	animation:         scale_header_background 4s ease-out;
+  filter:         blur(2px);
+  -webkit-transform: scale(1.055);
+  transform:         scale(1.055);
+  -webkit-animation: scale_header_background 4s ease-in-out forwards;
+	animation:         scale_header_background 4s ease-in-out forwards;
   z-index: -1;
 }
 
+
+@-webkit-keyframes scale_header_content {
+  0%   { -webkit-transform: scale(0.66)  translateZ(0px); filter: blur(3px); }
+  85%  { -webkit-transform: scale(1.037) translateZ(0px); filter: blur(0px); }
+  100% { -webkit-transform: scale(1)     translateZ(0px); filter: blur(0px); }
+}
+@keyframes scale_header_content {
+  0%   { transform: scale(0.66)  translateZ(0px); filter: blur(3px); }
+  85%  { transform: scale(1.037) translateZ(0px); filter: blur(0px); }
+  100% { transform: scale(1)     translateZ(0px); filter: blur(0px); }
+}
+
+/* See note on unfuzzing 3D transformed text: https://3dtransforms.desandro.com/cube
+If you remove this, the text will be super distorted */
+/* translasteZ(0px) is to prevent distortion.
+Strangely, putting it ONlY here is sufficient to elimate distortion/fuzzing on the text.
+However, putting only on the scale_header_animation also works.
+That said, I have also put it in both animations. */
 @-webkit-keyframes scale_header_background {
-  from {
-    -webkit-transform: scale(1.5);
-    -webkit-filter: blur(0px);
-  }
+  0%   { -webkit-transform: scale(1.5);   filter: blur(0px); }
+  85%  { -webkit-transform: scale(1);     filter: blur(3px); }
+  100% { -webkit-transform: scale(1.055); filter: blur(2px); }
 }
 @keyframes scale_header_background {
-  from {
-    transform: scale(1.5);
-    filter: blur(0px);
-  }
+  0%   { transform: scale(1.5)   translateZ(0px); filter: blur(0px); }
+  85%  { transform: scale(1)     translateZ(0px); filter: blur(3px); }
+  100% { transform: scale(1.055) translateZ(0px); filter: blur(2px); }
 }
 
 
+/* Without the bounce back:
+@-webkit-keyframes scale_header_background {
+  from { -webkit-transform: scale(1.5); -webkit-filter: blur(0px); }
+}
+@keyframes scale_header_background {
+  from { transform: scale(1.5); filter: blur(0px); }
+}
 @-webkit-keyframes scale_header_content {
   from { -webkit-transform: scale(0.66); }
 }
 @keyframes scale_header_content {
   from { transform: scale(0.66); }
 }
+*/
 
 
 /* =============================================================================
